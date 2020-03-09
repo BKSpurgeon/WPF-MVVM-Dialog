@@ -3,6 +3,7 @@ using DialogBeamProperties.Model.ProfileFileData;
 using DialogBeamProperties.Model.Properties;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace DialogBeamProperties.Helpers
@@ -31,7 +32,7 @@ namespace DialogBeamProperties.Helpers
                     var usimperialProfiles = profiles.UsimperialProfiles.Where(i => i.Profile.ToUpper().Equals(attributesProfileText.ToUpper()));
                     var usmetricProfiles = profiles.UsmetricProfiles.Where(i => i.Profile.ToUpper().Equals(attributesProfileText.ToUpper()));
                     if (beams.Count() > 0 || chinaProfiles.Count() > 0 ||
-                        usimperialProfiles.Count() > 0 || usmetricProfiles.Count() > 0)
+                        usimperialProfiles.Count() > 0 || usmetricProfiles.Count() > 0 || isRod(attributesProfileText))
                     {
                         return true;
                     }
@@ -42,6 +43,20 @@ namespace DialogBeamProperties.Helpers
                 MessageBox.Show(ex.Message);
             }
             return false;
+        }
+
+        private bool isRod(string attributesProfileText)
+        {
+            Regex regex = new Regex(@"^ROD\d+$");
+
+            if (regex.IsMatch(attributesProfileText))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool AreTopAndBottomPositionsValid(double positionLevelsTop, double positionLevelsBottom)

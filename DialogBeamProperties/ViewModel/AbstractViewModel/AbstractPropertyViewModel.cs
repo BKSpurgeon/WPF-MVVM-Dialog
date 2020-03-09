@@ -288,7 +288,7 @@ namespace DialogBeamProperties.ViewModel.AbstractViewModel
 
                 _attributesProfileText = value;
                 ProfileBorderColor = DefaultBorderColor;
-                IsSelectProfileButtonEnable = AttributesProfileText.Trim().Length > 1;
+                IsSelectProfileButtonEnable = AttributesProfileText.Trim().Length >= 1;
                 IsAttributesProfileChecked = AttributesProfileText.Trim().Length > 0;
                 OnPropertyChangedAsync(nameof(AttributesProfileText));
             }
@@ -767,6 +767,7 @@ namespace DialogBeamProperties.ViewModel.AbstractViewModel
         #endregion Check Is Data Valid
 
         #region Check is Valid Deciamil
+
         public bool IsValidDecimal(string value)
         {
             if (string.IsNullOrEmpty(value))
@@ -783,8 +784,8 @@ namespace DialogBeamProperties.ViewModel.AbstractViewModel
             {
                 return false;
             }
-                
         }
-        #endregion
+
+        #endregion Check is Valid Deciamil
     }
 }
